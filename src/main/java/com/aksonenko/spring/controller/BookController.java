@@ -1,63 +1,62 @@
 package com.aksonenko.spring.controller;
 
 import com.aksonenko.spring.entity.Book;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-//import com.aksonenko.spring.service.BookService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
+import com.aksonenko.spring.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/books")
 public class BookController {
-//
-//  @Autowired
-//  private BookService bookService;
 
+  @Autowired
+  private BookService bookService;
 
   @GetMapping("/getAll")
   public List<Book> getBooks() {
-
-//    Test
-    Book book1 = new Book(1, "book1", "author3", "genre2", 500);
-    Book book3 = new Book(3, "book3", "author2", "genre1", 700);
-//    book1
-    List<Book> list = new ArrayList<>();
-    list.add(book1);
-    list.add(book3);
-
+    List<Book> list = bookService.getAllBooks();
     return list;
   }
 
   @GetMapping("/{id}")
-  // public Book getBook(@RequestParam("book") Integer id) {
-  public Book getBook(@PathVariable Integer id){
-//    Test
-    List<Book> books = new ArrayList<>(2);
-    books.add(new Book(2, "book2", "author2", "genre2", 500));
-    books.add(new Book(3, "book3", "author3", "genre3", 400));
-
-    return books.stream()
-      .filter(book -> book.getId() == id)
-      .findFirst()
-      .orElse(null);
+  public Book getBook(@PathVariable Integer id) {
+    Book book = bookService.getBook(id);
+    return book;
   }
 
-//  @RequestMapping("/")
-//  public String showAllBooks(Model model) {
+//  @PostMapping("/save")
+//  public Book saveBook(@RequestBody Book book) {
+//    System.out.println(book);
+//    System.out.println(book.getName());
+//    bookService.saveBook(book);
 //
-//    List<Book> allBooks = bookService.getAllBooks();
-//    model.addAttribute("allBooks", allBooks);
-//
-//    return "all-books";
+//    return book;
 //  }
-//
+  @PostMapping("/save")
+  public Book saveBook(@RequestBody Book book) {
+    System.out.println(book.getName());
+//    System.out.println(book.getName());
+//    bookService.saveBook(book);
+
+    return book;
+  }
+
+//  @PostMapping("/save")
+//  public String saveBook(@RequestParam("book") Book book) {
+//    bookService.saveBook(book);
+//    return "redirect:/";
+//  }
+
+  @DeleteMapping("/delete")
+  public String deleteBook(@RequestParam("id") int id) {
+    bookService.deleteBook(id);
+    return "redirect:/";
+  }
+
 //  @RequestMapping("/addNewBook")
 //  public String addNewBook(Model model) {
 //

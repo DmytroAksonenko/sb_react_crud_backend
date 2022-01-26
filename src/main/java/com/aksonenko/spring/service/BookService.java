@@ -1,16 +1,17 @@
 package com.aksonenko.spring.service;
 
-//import java.awt.print.Book;
-//import java.util.List;
+import com.aksonenko.spring.entity.Book;
+
+import java.util.List;
 
 public interface BookService {
 
-//  List<Book> getAllBooks();
-//
-//  void saveBook(Book book);
-//
-//  Book getBook(int id);
-//
-//  void deleteBook(int id);
+  List<Book> getAllBooks();
+
+  void saveBook(Book book);
+
+  Book getBook(int id);
+
+  void deleteBook(int id);
 
 }
