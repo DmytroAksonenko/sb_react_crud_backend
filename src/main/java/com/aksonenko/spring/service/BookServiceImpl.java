@@ -25,7 +25,6 @@ public class BookServiceImpl implements BookService {
   @Transactional
   public void saveBook(Book book) {
     bookDAO.saveBook(book);
-
   }
 
   @Override
@@ -38,7 +37,6 @@ public class BookServiceImpl implements BookService {
   @Transactional
   public void deleteBook(int id) {
     bookDAO.deleteBook(id);
-
   }
 
 }
